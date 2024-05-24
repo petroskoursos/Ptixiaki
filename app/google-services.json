@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "987012166874",
+    "project_id": "ptixiakiergasia-51014",
+    "storage_bucket": "ptixiakiergasia-51014.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:987012166874:android:ad81d4f64223f46077e1e3",
+        "android_client_info": {
+          "package_name": "com.example.ptixiakiergasia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtA-CtsIxjlaBDd0wk79pziBbKBp0bNYQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
