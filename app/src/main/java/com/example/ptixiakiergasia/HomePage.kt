@@ -25,9 +25,7 @@ import com.example.ptixiakiergasia.Database.saveToFirebase
 import com.example.ptixiakiergasia.ui.theme.Background
 
 @Composable
-fun HomePage(
-    navController: NavHostController
-){
+fun HomePage() {
     // images
     val imageResIds = listOf(
         R.drawable.cocacola,
@@ -42,12 +40,11 @@ fun HomePage(
         R.drawable.rozexhro,
         R.drawable.grapefruit,
         R.drawable.lemoni,
-        R.drawable.vikossprite,
-        //R.drawable.vikos_gazoza
+        R.drawable.vikossprite
     )
     val images = imageResIds.map { painterResource(id = it) }
-    //names
-    val itemName = listOf<String>(
+    // names
+    val itemName = listOf(
         "Coca Cola",
         "Coca Cola Zero",
         "Κοκκινο ημ",
@@ -57,7 +54,6 @@ fun HomePage(
         "Λουξ Λεμοναδα",
         "perrier_lemoni",
         "portokalada",
-        //"portokalada_mple",
         "roze_xhro",
         "schweppes_grapfruit",
         "schewppes_lemoni",
@@ -65,6 +61,8 @@ fun HomePage(
     )
 
     var quantities by rememberSaveable { mutableStateOf(mapOf<String, String>()) }
+    var isPressed by rememberSaveable { mutableStateOf(false) }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -73,22 +71,17 @@ fun HomePage(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(15.dp),
-
-            ) {
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(2),
-                modifier = Modifier.padding(15.dp)
-            ){
-                //call the fuction that displays the items
+                .padding(15.dp)
+        ) {
+            LazyVerticalGrid(columns = GridCells.Fixed(2), modifier = Modifier.padding(15.dp)) {
                 items(images.size) { index ->
                     Item(
                         text = itemName[index],
                         image = images[index],
-                        //on value change it updates the qty of the map
                         onQuantityChange = { itemName, qty ->
                             quantities = quantities.toMutableMap().apply { put(itemName, qty) }
-                        })
+                        }
+                    )
                 }
             }
         }
@@ -97,6 +90,8 @@ fun HomePage(
         }) {
             Text(text = "Save")
         }
-
     }
+}
+fun Map<String, String>.toQueryString(): String {
+    return this.map { "${it.key}=${it.value}" }.joinToString("&")
 }
