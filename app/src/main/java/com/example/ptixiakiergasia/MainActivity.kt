@@ -24,39 +24,18 @@ class MainActivity : ComponentActivity() {
             PtixiakiErgasiaTheme {
 
                 val navController = rememberNavController()
-
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier
                         .fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    NavHost(navController = navController, startDestination = "HomePage"){
-                        composable(route= "HomePage"){
-                            HomePage(navController = navController)
-                        }
-                        composable(route= "OrderPreview/{map}"){backStackEnrty ->
-                            val mapString = backStackEnrty.arguments?.getString("map")
-                            val map =mapString?.toMap()
-                            if (map != null) {
-                                OrderPreview(quantities = map)
-                            }
-                        }
 
-                    }
                 }
             }
         }
     }
 }
-
-fun String.toMap(): Map<String, String> {
-    return this.split("&").associate {
-        val (key, value) = it.split("=")
-        key to value
-    }
-}
-
 
 
 

@@ -92,17 +92,11 @@ fun HomePage(
                 }
             }
         }
-        val mapString=quantities.toQueryString()
-
         Button(onClick = {
-            navController.navigate(Screen.Details.route)
+
         }) {
             Text(text = "Save")
         }
 
     }
-}
-
-fun Map<String, String>.toQueryString(): String {
-    return this.map { "${it.key}=${it.value}" }.joinToString("&")
 }
