@@ -22,29 +22,32 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PtixiakiErgasiaTheme {
-
+                var viewModel:ViewModel = ViewModel()
                 val navController = rememberNavController()
-
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier
                         .fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                  HomePage()
+                    //HomePage(viewModel=viewModel)
+                   //OrderScreen(viewModel = viewModel)
+                    NavHost(navController = navController,
+                        startDestination = Screens.Homepage.route){
+                         composable(route = Screens.Homepage.route){
+                                HomePage(viewModel = viewModel,
+                                    navController = navController)
+                         }
+                        composable(route = Screens.Order_screen.route){
+                            OrderScreen(viewModel = viewModel,
+                                navController = navController)
+                        }
+                    }
                 }
             }
         }
     }
 }
-
-fun String.toMap(): Map<String, String> {
-    return this.split("&").associate {
-        val (key, value) = it.split("=")
-        key to value
-    }
-}
-
 
 
 
