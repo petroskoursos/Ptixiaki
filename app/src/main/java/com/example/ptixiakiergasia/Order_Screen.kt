@@ -1,6 +1,7 @@
 package com.example.ptixiakiergasia
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,7 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -27,8 +29,10 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -61,12 +65,26 @@ fun OrderScreen(
                     Icon(imageVector = Icons.Default.Home,
                         contentDescription ="Home",
                         tint = Color.White,
+                        modifier = Modifier
+                            .clickable {
+                                navController.navigate(Screens.Homepage.route)
+                            }
                     )
-
                     Icon(imageVector = Icons.Default.ShoppingCart,
                     contentDescription ="Home",
                     tint = Color.White)
                 }
+            }
+        },
+        floatingActionButton = {
+            FloatingActionButton(onClick = { /*TODO*/ },
+                containerColor = Color.Green,
+                contentColor = Color.Black,
+                modifier = Modifier.fillMaxWidth(0.4f)
+            ) {
+               Text(text = "Send Order ${viewModel.getTotalPrice()}",
+                   fontWeight = FontWeight.Bold
+               )
             }
         }
     ){ innerPadding ->
@@ -81,7 +99,7 @@ fun OrderScreen(
                //for((itemName,qty) in quantities){
                items(quantities.toList()){(itemName,qty) ->
                    Items(
-                       itemName = itemName, qty = qty )
+                       itemName = itemName, qty = qty, viewModel = ViewModel() )
                }
            }
         }
@@ -92,10 +110,12 @@ fun OrderScreen(
 @Composable
 fun Items(
     itemName:String,
-    qty:String){
+    qty:String,
+    viewModel: ViewModel){
     Column(modifier = Modifier
         .padding(horizontal = 15.dp)
     ){
+        var itemPrice =""
         Row(modifier = Modifier
             .padding(vertical = 10.dp)
             .fillMaxWidth()
@@ -103,11 +123,13 @@ fun Items(
             .padding(15.dp),
             horizontalArrangement = Arrangement.spacedBy(60.dp)
         ){
+
+            itemPrice = viewModel.getPrice(itemName,qty)
             Text(text = "$itemName", color = Color.Black)
             Text(text = "$qty",color = Color.Black,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth(0.1f))
-            Text(text = "ItemPrice",color = Color.Black,
+            Text(text = "$itemPrice",color = Color.Black,
                 modifier = Modifier.fillMaxWidth(1f)
             , textAlign = TextAlign.End)
         }
