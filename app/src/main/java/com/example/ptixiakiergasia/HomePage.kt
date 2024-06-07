@@ -15,7 +15,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -26,7 +25,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -34,9 +32,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import com.example.ptixiakiergasia.Database.saveToFirebase
 import com.example.ptixiakiergasia.ui.theme.Background
+import com.example.ptixiakiergasia.ui.theme.RobotoBoldItalicFontFamily
+import com.example.ptixiakiergasia.ui.theme.RobotoFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -62,6 +60,7 @@ fun HomePage(
         //R.drawable.vikos_gazoza
     )
     val images = imageResIds.map { painterResource(id = it) }
+
     //names
     val itemName = listOf<String>(
         "Coca Cola",
@@ -89,7 +88,7 @@ fun HomePage(
                    containerColor = Color.Black,
                    titleContentColor = Color.White
                ),
-               title = { "Homepage" })
+               title = { Text(text = "Homepage", fontFamily = RobotoBoldItalicFontFamily) })
        },
        bottomBar = {
            BottomAppBar (

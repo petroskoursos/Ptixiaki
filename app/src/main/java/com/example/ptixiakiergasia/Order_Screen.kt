@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.ptixiakiergasia.ui.theme.Background
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,7 +49,7 @@ fun OrderScreen(
         topBar = {
             TopAppBar(
                 colors =TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.Black,
+                    containerColor = Color.Gray,
                     titleContentColor = Color.White
                 )
                 ,
@@ -57,7 +58,7 @@ fun OrderScreen(
         },
         bottomBar = {
             BottomAppBar (
-                containerColor= Color.Black
+                containerColor= Color.Gray
             ){
                 Row(modifier = Modifier
                     .fillMaxWidth(),
@@ -67,7 +68,7 @@ fun OrderScreen(
                         tint = Color.White,
                         modifier = Modifier
                             .clickable {
-                                navController.navigate(Screens.Homepage.route)
+                                navController.popBackStack()
                             }
                     )
                     Icon(imageVector = Icons.Default.ShoppingCart,
@@ -82,7 +83,7 @@ fun OrderScreen(
                 contentColor = Color.Black,
                 modifier = Modifier.fillMaxWidth(0.4f)
             ) {
-               Text(text = "Send Order ${viewModel.getTotalPrice()}",
+               Text(text = "Send Order ${viewModel.tempPrice}",
                    fontWeight = FontWeight.Bold
                )
             }
@@ -91,7 +92,7 @@ fun OrderScreen(
         Box(modifier = Modifier
             .fillMaxSize()
             .padding(innerPadding)
-            .background(Color.DarkGray)
+            .background(Background)
         ){
            LazyColumn(modifier = Modifier
                .padding(innerPadding)
@@ -102,6 +103,8 @@ fun OrderScreen(
                        itemName = itemName, qty = qty, viewModel = ViewModel() )
                }
            }
+
+
         }
     }
 }
@@ -125,6 +128,7 @@ fun Items(
         ){
 
             itemPrice = viewModel.getPrice(itemName,qty)
+
             Text(text = "$itemName", color = Color.Black)
             Text(text = "$qty",color = Color.Black,
                 textAlign = TextAlign.Center,

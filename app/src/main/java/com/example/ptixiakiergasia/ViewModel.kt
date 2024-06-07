@@ -15,28 +15,27 @@ class ViewModel:ViewModel(){
 
     var quantity: Map<String,String> = _quantity
     var mapSize : Int = 0
-    val prices: State<Map<String, String>> get() = _price
+    var prices : Double =0.0
 
     var tempPrice: Double=0.0
 
     fun getPrice(_itemName:String,qty:String):String
     {
         var quantity = qty.toInt()
+
         val price =when(_itemName){
             "Coca Cola" -> 2.0
             "Coca Cola Zero" ->2.0
             else -> 1.0
         }
         tempPrice= quantity*price
-        getTotalPrice()
-        return tempPrice.toString()
+        prices = tempPrice
+
+
+        return String.format("%.2f",tempPrice)
+    }
+    fun getTotalPrice():Double{
+        return tempPrice
     }
 
-    fun getTotalPrice():String{
-        var totalPrice = 0
-
-        totalPrice =+ tempPrice.toInt()
-
-        return totalPrice.toString()
-    }
 }
