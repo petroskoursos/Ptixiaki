@@ -11,6 +11,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -67,7 +68,7 @@ fun Item(
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally){
                     Text(text = text, fontFamily = RobotoFontFamily)
-                    OutlinedTextField(
+                    TextField(
                         value = itemQty, onValueChange = {
                         itemQty = it
                         onQuantityChange(text, it)

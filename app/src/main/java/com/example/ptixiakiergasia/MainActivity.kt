@@ -14,6 +14,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.ptixiakiergasi.firstScreen
 import com.example.ptixiakiergasia.ui.theme.PtixiakiErgasiaTheme
 
 class MainActivity : ComponentActivity() {
@@ -35,13 +36,18 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     //HomePage(viewModel=viewModel)
-                   //OrderScreen(viewModel = viewModel)
+                    //OrderScreen(viewModel = viewModel)
+
                     NavHost(navController = navController,
-                        startDestination = Screens.Homepage.route){
-                         composable(route = Screens.Homepage.route){
-                                HomePage(viewModel = viewModel,
-                                    navController = navController)
-                         }
+                        startDestination = Screens.FirstScreen.route){
+
+                        composable(route = Screens.FirstScreen.route){
+                            firstScreen(navController)
+                        }
+                        composable(route = Screens.Homepage.route){
+                            HomePage(viewModel = viewModel,
+                                navController = navController)
+                        }
                         composable(route = Screens.Order_screen.route){
                             OrderScreen(viewModel = viewModel,
                                 navController = navController)

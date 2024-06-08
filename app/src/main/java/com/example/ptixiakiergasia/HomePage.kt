@@ -85,14 +85,14 @@ fun HomePage(
        topBar = {
            TopAppBar(
                colors = TopAppBarDefaults.topAppBarColors(
-                   containerColor = Color.Black,
+                   containerColor = Background,
                    titleContentColor = Color.White
                ),
                title = { Text(text = "Homepage", fontFamily = RobotoBoldItalicFontFamily) })
        },
        bottomBar = {
            BottomAppBar (
-               containerColor= Color.Black
+               containerColor= Background
            ){
                Row(modifier = Modifier
                    .fillMaxWidth(),
@@ -119,7 +119,7 @@ fun HomePage(
                        navController = navController,
                        quantities = quantities)
                },
-               containerColor = Color.Green,
+               containerColor = Color.Gray,
                contentColor = Color.Black
            ) {
                Text(text = "Save Order")

@@ -38,4 +38,7 @@ class ViewModel:ViewModel(){
         return tempPrice
     }
 
+    fun returnQty(qty:String,newqty:String){
+
+    }
 }
