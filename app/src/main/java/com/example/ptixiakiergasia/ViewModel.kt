@@ -2,8 +2,10 @@ package com.example.ptixiakiergasia
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,6 +14,7 @@ import kotlin.system.exitProcess
 class ViewModel:ViewModel(){
     private val _price = mutableStateOf(mapOf<String,String>())
     private val _quantity = (mapOf<String,String>())
+    var kavaName = ""
 
     var quantity: Map<String,String> = _quantity
     var mapSize : Int = 0

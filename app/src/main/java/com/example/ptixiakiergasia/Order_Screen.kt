@@ -39,6 +39,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.ptixiakiergasia.ui.theme.Background
+import com.example.ptixiakiergasia.ui.theme.RobotoBoldItalicFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -55,7 +56,13 @@ fun OrderScreen(
                     titleContentColor = Color.White
                 )
                 ,
-                title = { Text(text = "Orders") }
+                title = {
+                    Row(horizontalArrangement = Arrangement.SpaceEvenly,
+                        modifier = Modifier.fillMaxWidth()){
+                        Text(text = "Homepage", fontFamily = RobotoBoldItalicFontFamily)
+                        Text(text = "Kava: ${viewModel.kavaName}")
+                    }
+                }
             )
         },
         bottomBar = {

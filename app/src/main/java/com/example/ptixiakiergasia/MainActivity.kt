@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
                         startDestination = Screens.FirstScreen.route){
 
                         composable(route = Screens.FirstScreen.route){
-                            firstScreen(navController)
+                            firstScreen(navController,viewModel)
                         }
                         composable(route = Screens.Homepage.route){
                             HomePage(viewModel = viewModel,

@@ -88,7 +88,13 @@ fun HomePage(
                    containerColor = Background,
                    titleContentColor = Color.White
                ),
-               title = { Text(text = "Homepage", fontFamily = RobotoBoldItalicFontFamily) })
+               title = { 
+                   Row(horizontalArrangement = Arrangement.SpaceEvenly,
+                       modifier = Modifier.fillMaxWidth()){
+                       Text(text = "Homepage", fontFamily = RobotoBoldItalicFontFamily)
+                       Text(text = "Kava: ${viewModel.kavaName}")
+                   }
+               })
        },
        bottomBar = {
            BottomAppBar (
