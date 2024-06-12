@@ -14,6 +14,7 @@ import kotlin.system.exitProcess
 class ViewModel:ViewModel(){
     private val _price = mutableStateOf(mapOf<String,String>())
     private val _quantity = (mapOf<String,String>())
+    var storeName =""
     var kavaName = ""
 
     var quantity: Map<String,String> = _quantity

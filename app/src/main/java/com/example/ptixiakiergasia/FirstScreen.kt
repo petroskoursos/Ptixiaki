@@ -8,8 +8,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -31,6 +33,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -39,6 +42,8 @@ import androidx.navigation.NavController
 import com.example.ptixiakiergasia.Screens
 import com.example.ptixiakiergasia.ViewModel
 import com.example.ptixiakiergasia.ui.theme.Background
+import com.example.ptixiakiergasia.ui.theme.RobotoBoldItalicFontFamily
+import com.example.ptixiakiergasia.ui.theme.RobotoFontFamily
 import org.intellij.lang.annotations.JdkConstants.FontStyle
 
 
@@ -51,9 +56,17 @@ fun firstScreen(
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
+
         var isExpanded by remember { mutableStateOf(false) }
         val kaves = listOf("maziotis", "oiknomopoulos","Ass")
         var isSelected by rememberSaveable { mutableStateOf("") }
+        var name by remember{ mutableStateOf("") }
+        var isOpen by remember { mutableStateOf(true) }
+        viewModel.storeName=name
+        if(isOpen && name.isEmpty()) {
+            EnterName(onClose = { isOpen = !isOpen }, savedName = { name = it })
+        }
+
 
         Column(
             modifier = Modifier
@@ -63,14 +76,16 @@ fun firstScreen(
             verticalArrangement = Arrangement.Center
         ) {
 
-            Text(text = "Name of the store", fontSize = 25.sp)
+            Text(text = name, fontSize = 25.sp)
 
             Spacer(modifier = Modifier.padding(bottom = 15.dp))
-            OutlinedTextField(
+            TextField(
                 value = isSelected,
                 onValueChange ={isSelected= it},
                 readOnly = true,
-                modifier = Modifier.background(Color.White),
+                modifier = Modifier
+                    .clip(RoundedCornerShape(10.dp))
+                    .background(Color.White),
                 trailingIcon ={
                     IconButton(onClick = { isExpanded=true }) {
                         Icon(imageVector = Icons.Default.ArrowDropDown,
@@ -80,6 +95,7 @@ fun firstScreen(
                         expanded = isExpanded,
                         onDismissRequest = { isExpanded=false},
                         modifier = Modifier
+                            .clip(RoundedCornerShape(10.dp))
                             .fillMaxWidth(0.7f))
                     {
                         kaves.forEach { selectOption ->
@@ -87,7 +103,7 @@ fun firstScreen(
                             DropdownMenuItem(
                                 modifier = Modifier
                                     .background(Color.White),
-                                text = { Text(text = selectOption)},
+                                text = { Text(text = selectOption, fontFamily = RobotoBoldItalicFontFamily)},
                                 onClick = {
                                     isExpanded=false
                                     isSelected=selectOption
@@ -109,6 +125,37 @@ fun firstScreen(
 
         }
     }
+}
+
+@Composable
+fun  EnterName(
+    onClose:() -> Unit,
+    savedName:(String)->Unit
+){
+    var name by remember { mutableStateOf("") }
+   // var isOpen by remember { mutableStateOf(false) } isOpen=onClose()
+  //  if(isOpen) {
+        AlertDialog(
+            onDismissRequest = {  },
+            confirmButton = {
+                Text(text = "Save",
+                    modifier = Modifier
+                        .clickable {
+                           if(name.isNotEmpty()){
+                               onClose()
+                               savedName(name)
+                           }
+                        })
+            },
+            title = { Text(text = "Enter Store Name") },
+            text = {
+                TextField(
+                    value = name,
+                    onValueChange = { name = it }
+                )
+            }
+        )
+   // }
 }
 
 
